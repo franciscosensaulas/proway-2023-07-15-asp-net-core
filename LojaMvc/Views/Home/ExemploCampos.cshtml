@@ -1,0 +1,159 @@
+﻿<h1>Bom anime: Narutinho</h1>
+<img src="https://th.bing.com/th/id/OIP.2OQOmXgPCrnpmgjEnXKONwHaF7?pid=ImgDet&rs=1" />
+<h2>Personagem: Sasuke</h2>
+<p>Sasuke Uchiha (うちはサスケ, Uchiha Sasuke) é um dos últimos membros sobreviventes do clã Uchiha de Konohagakure, além de ser a reencarnação atual de Indra. Ele se tornou um shinobi para que pudesse algum dia ficar forte o suficiente para se vingar contra o seu irmão mais velho, Itachi, que tinha massacrado todo o seu clã. Inicialmente, um membro do Time Kakashi de Konoha, Sasuke desertou da aldeia para obter poder com Orochimaru, e mais tarde também se juntou a Akatsuki, tornando-se um criminoso internacional no processo. Mais tarde, ele se torna uma peça fundamental para acabar com a Quarta Guerra Mundial Ninja, até ser finalmente redimido por seu rival, e também melhor amigo, Naruto Uzumaki. Sasuke decide voltar para Konoha, dedicando a sua vida para ajudar a proteger a vila e seus habitantes.</p>
+
+
+<h3>Aldeia: Folha</h3>
+
+
+<span>Lista de animes:</span>
+<ul>
+    <li>Tokyo Ghoul</li>
+    <li>Digimon</li>
+    <li>Bleach</li>
+</ul>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Nome</th>
+            <th>Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Sakura</td>
+            <td>
+                <a href="/home/index" target="_self">Editar</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<a href="https://www.kabum.com.br" target="_blank">Kabum</a>
+
+<h3>Cadastro de personagem</h3>
+<div>
+    <label for="aldeia">Aldeia</label>
+    <input type="text" id="aldeia" />
+</div>
+<div>
+    <label for="nome">Nome</label>
+    <input type="text" id="nome" />
+</div>
+
+<div>
+    <label for="idade">Idade</label>
+    <input type="number" id="idade" />
+    <!-- 
+        style é utilizado para fazer definições com CSS
+        display: none a tag não será apresentada para o usuário
+    -->
+    <span style="display: none" id="ano-nascimento"></span>
+</div>
+
+<div>
+    <label for="selos">Selos</label>
+    <select id="selos">
+        <option>Pássaro</option>
+        <option>Javali</option>
+        <option>Cão</option>
+        <option>Dragão</option>
+        <option>Boi</option>
+        <option>Tigre</option>
+    </select>
+</div>
+
+<div>
+    <label>Invocações</label>
+</div>
+
+<div>
+    <input type="checkbox" id="invocacoes-fukasaku" />
+    <label for="invocacoes-fukasaku">Fukasaku</label>
+</div>
+
+<div>
+    <input type="checkbox" id="invocacoes-gamabunta" />
+    <label for="invocacoes-gamabunta">Gamabunta</label>
+</div>
+
+<div>
+    <span>Possuí Biju?</span>
+</div>
+<div>
+    <input type="radio" name="possuiBiju" id="possui-biju-sim" />
+    <label for="possui-biju-sim">Sim</label>
+</div>
+<div>
+    <input type="radio" name="possuiBiju" id="possui-biju-nao" />
+    <label for="possui-biju-nao">Não</label>
+</div>
+
+<div>
+    <label for="data-nascimento">Data de nascimento</label>
+    <input type="date" id="data-nascimento" />
+</div>
+
+<div>
+    <label for="email">Email</label>
+    <input type="email" id="email" />
+</div>
+
+<div>
+    <label for="senha">Senha</label>
+    <input type="password" id="senha" />
+</div>
+
+<div>
+    <label for="imagem">Imagem perfil</label>
+    <input type="file" id="imagem" />
+</div>
+
+
+<button type="button" onclick="calcularIdade()">Calcular Idade</button>
+<button type="button" id="button-calcular-idade">Calcular Idade</button>
+
+<script>
+    function calcularIdade() {
+        let nome = document.getElementById("nome").value;
+        let idade = parseInt(document.getElementById("idade").value);
+        let anoNascimento = calcularAnoNascimento(idade);
+
+        let mensagem = "Nome: " + nome + " tem " + idade + " anos de idade, nasceu no ano " + anoNascimento;
+        alert(mensagem);
+    }
+
+    document.getElementById("button-calcular-idade")
+        .addEventListener("click", () => calcularIdade());
+
+    function apresentarAnoNascimento(){
+        // Variável com o valor da idade em int
+        let idade = parseInt(document.getElementById("idade").value);
+        // Verifica se a conversão para int deu certo, ou seja, se for NaN não é um número
+        // Neste caso verificamos que deve ser um número
+        if(!isNaN(idade)){
+            let anoNascimento = calcularAnoNascimento(idade);
+            let spanAnoNascimento = document.getElementById("ano-nascimento");
+            spanAnoNascimento.innerText = `Ano de Nascimento ${anoNascimento}`;
+            spanAnoNascimento.style.display = "inline-block";
+        }else{
+            let spanAnoNascimento = document.getElementById("ano-nascimento");
+            spanAnoNascimento.innerText = ``;
+            spanAnoNascimento.style.display = "none";
+        }
+    }
+
+    document.getElementById("idade").addEventListener(
+        "focusout", () => apresentarAnoNascimento());
+
+    function calcularAnoNascimento(idade){
+        let anoAtual = new Date().getFullYear();
+        let anoNascimento = anoAtual - idade;
+
+        return anoNascimento;
+    }
+</script>
