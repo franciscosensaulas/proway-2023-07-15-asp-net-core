@@ -54,6 +54,29 @@ public class HomeController : Controller
         return Ok(mensagem);
     }
 
+    [Route("/home/imc")]
+    [HttpGet]
+    public IActionResult CalculoImc()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult CalularImc(
+        [FromForm] string nome,
+        [FromForm] double altura,
+        [FromForm] double peso)
+    {
+        if(nome.Length < 3)
+        {
+            return BadRequest("Nome deve conter no mínimo 3 caracters");
+        }
+
+        var imc = peso / (altura * altura);
+
+        return Ok($"{nome} tem o IMC: {imc}");
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
