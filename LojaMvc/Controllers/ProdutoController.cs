@@ -1,4 +1,5 @@
-﻿using LojaRepositorios.Entidades;
+﻿using LojaRepositorios.Database;
+using LojaRepositorios.Entidades;
 using LojaServicos.Servicos;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +8,11 @@ namespace LojaMvc.Controllers
     [Route("/produto")]
     public class ProdutoController : Controller
     {
+        public ProdutoController(LojaContexto contexto)
+        {
+            var produtos = contexto.Set<Produto>().ToList();
+        }
+
         [HttpGet]
         // /produto
         public IActionResult Index()
@@ -37,7 +43,6 @@ namespace LojaMvc.Controllers
             produto.Nome = nome.Trim();
             produto.PrecoUnitario = precoUnitario;
             produto.Quantidade = 1;
-            
             produtoServico.Cadastrar(produto);
 
             return RedirectToAction("Index");
