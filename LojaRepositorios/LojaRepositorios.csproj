@@ -5,11 +5,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="Database\" />
-    <Folder Include="Entidades\" />
-    <Folder Include="Repositorios\" />
-  </ItemGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+	</ItemGroup>
 
 </Project>

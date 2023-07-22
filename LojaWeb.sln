@@ -5,9 +5,15 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LojaMvc", "LojaMvc\LojaMvc.csproj", "{A1FB8887-B81C-4EA3-B994-7A2D2188B26F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LojaServicos", "LojaServicos\LojaServicos.csproj", "{CCF18564-4EF6-4351-A881-70C71A8F6491}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LojaServicos", "LojaServicos\LojaServicos.csproj", "{CCF18564-4EF6-4351-A881-70C71A8F6491}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LojaRepositorios", "LojaRepositorios\LojaRepositorios.csproj", "{F0E63C8B-CDDC-4C46-9FB3-B49CA3B5CD1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LojaRepositorios", "LojaRepositorios\LojaRepositorios.csproj", "{F0E63C8B-CDDC-4C46-9FB3-B49CA3B5CD1E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00 - Application", "00 - Application", "{8B831DC1-2675-4265-B601-19E6C57C6CB2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 - Services", "01 - Services", "{AF4B8604-A652-43C3-898C-ECD9B47D3A04}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02 - Repositories", "02 - Repositories", "{54FFD9AD-CEEE-409D-9510-51B6AF634C1A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +36,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A1FB8887-B81C-4EA3-B994-7A2D2188B26F} = {8B831DC1-2675-4265-B601-19E6C57C6CB2}
+		{CCF18564-4EF6-4351-A881-70C71A8F6491} = {AF4B8604-A652-43C3-898C-ECD9B47D3A04}
+		{F0E63C8B-CDDC-4C46-9FB3-B49CA3B5CD1E} = {54FFD9AD-CEEE-409D-9510-51B6AF634C1A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {12820224-4105-4D4D-92A6-7A83C9518729}
