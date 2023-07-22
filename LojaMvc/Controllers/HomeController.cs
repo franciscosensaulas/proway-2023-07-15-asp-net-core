@@ -34,7 +34,7 @@ public class HomeController : Controller
     }
 
     public IActionResult CadastrarPersonagem(
-        [FromQuery] string nome, 
+        [FromQuery] string campoNome, 
         [FromQuery] int idade)
     {
         var anoHoje = DateTime.Now.Year;
@@ -49,7 +49,7 @@ public class HomeController : Controller
             status = "Maior ou igual a 18 anos";
         }
 
-        var mensagem = $"{nome} nasceu em {anoNascimento}. Status: {status}";
+        var mensagem = $"{campoNome} nasceu em {anoNascimento}. Status: {status}";
 
         return Ok(mensagem);
     }
