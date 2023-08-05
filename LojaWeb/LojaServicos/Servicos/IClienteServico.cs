@@ -1,10 +1,10 @@
-﻿using LojaRepositorios.Entidades;
+﻿using LojaServicos.Dtos.Clientes;
 
 namespace LojaServicos.Servicos
 {
     public interface IClienteServico
     {
-        void Cadastrar(Cliente cliente);
-        List<Cliente> ObterTodos(string? pesquisa);
+        void Cadastrar(ClienteCadastrarDto cliente);
+        List<ClienteIndexDto> ObterTodos(string? pesquisa);
     }
 }

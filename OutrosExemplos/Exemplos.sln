@@ -5,7 +5,9 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExemplosLinq", "ExemplosLinq\ExemplosLinq.csproj", "{0C40B9EC-763E-4791-90C6-E44AC1CBF935}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExemplosOrientacaoObjetos", "ExemplosOrientacaoObjetos\ExemplosOrientacaoObjetos.csproj", "{B17D75BB-AE28-479C-A75E-35FD6E432510}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExemplosOrientacaoObjetos", "ExemplosOrientacaoObjetos\ExemplosOrientacaoObjetos.csproj", "{B17D75BB-AE28-479C-A75E-35FD6E432510}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExemploOrientacaoTests", "ExemploOrientacaoTests\ExemploOrientacaoTests.csproj", "{A04CF65E-9A1E-49A8-A401-2296A8C6121A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B17D75BB-AE28-479C-A75E-35FD6E432510}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B17D75BB-AE28-479C-A75E-35FD6E432510}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B17D75BB-AE28-479C-A75E-35FD6E432510}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A04CF65E-9A1E-49A8-A401-2296A8C6121A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A04CF65E-9A1E-49A8-A401-2296A8C6121A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A04CF65E-9A1E-49A8-A401-2296A8C6121A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A04CF65E-9A1E-49A8-A401-2296A8C6121A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

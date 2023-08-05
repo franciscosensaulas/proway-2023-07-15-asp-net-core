@@ -1,4 +1,6 @@
-﻿using LojaRepositorios.Entidades;
+﻿using LojaMvc.Models.Cliente;
+using LojaRepositorios.Entidades;
+using LojaServicos.Dtos.Clientes;
 using LojaServicos.Servicos;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,56 +19,79 @@ namespace LojaMvc.Controllers
         [HttpGet]
         public IActionResult Index([FromQuery] string? pesquisa)
         {
-            var clientes = _clienteServico.ObterTodos(pesquisa);
+            var dtos = _clienteServico.ObterTodos(pesquisa);
 
-            ViewBag.Clientes = clientes;
-            ViewBag.Pesquisa = pesquisa;
+            var viewModel = ConstruirClienteIndexViewModel(dtos, pesquisa);
 
-            return View();
+            return View(viewModel);
+        }
+
+        private ClienteIndexViewModel ConstruirClienteIndexViewModel(List<ClienteIndexDto> dtos, string? pesquisa)
+        {
+            return new ClienteIndexViewModel
+            {
+                Pesquisa = pesquisa,
+                Clientes = ConstruirClienteViewModel(dtos)
+            };
+        }
+
+        private List<ClienteViewModel> ConstruirClienteViewModel(List<ClienteIndexDto> dtos)
+        {
+            var viewModels = new List<ClienteViewModel>();
+            foreach (var dto in dtos)
+            {
+                viewModels.Add(new ClienteViewModel
+                {
+                    Id = dto.Id,
+                    Nome = dto.Nome,
+                    Cpf = dto.Cpf,
+                    Endereco = dto.Endereco
+                });
+            }
+            return viewModels;
         }
 
         [Route("cadastrar")]
         [HttpGet]
         public IActionResult Cadastrar()
         {
-            return View();
+            var viewModel = new ClienteCadastroViewModel();
+
+            return View(viewModel);
         }
 
         [Route("cadastrar")]
         [HttpPost]
-        public IActionResult Cadastrar(
-            [FromForm] string nome,
-            [FromForm] string cpf,
-            [FromForm] DateTime dataNascimento,
-            [FromForm] string estado,
-            [FromForm] string cidade,
-            [FromForm] string bairro,
-            [FromForm] string cep,
-            [FromForm] string logradouro,
-            [FromForm] string numero,
-            [FromForm] string? complemento
-            )
+        public IActionResult Cadastrar([FromForm] ClienteCadastroViewModel clienteCadastro)
         {
-            var cliente = new Cliente
+            if (ModelState.IsValid == false)
             {
-                Nome = nome.Trim(),
-                Cpf = cpf.Trim(),
-                DataNascimento = dataNascimento,
-                Endereco = new Endereco
-                {
-                    Estado = estado,
-                    Cidade = cidade,
-                    Bairro = bairro,
-                    Cep = cep,
-                    Logradouro = logradouro, 
-                    Numero = numero,
-                    Complemento = complemento
-                }
-            };
+                return View("Cadastrar", clienteCadastro);
+            }
 
-            _clienteServico.Cadastrar(cliente);
+            var clienteCadatrarDto = ConstruirClienteCadastrarDto(clienteCadastro);
+
+            _clienteServico.Cadastrar(clienteCadatrarDto);
 
             return RedirectToAction("Index");
+        }
+
+        public ClienteCadastrarDto ConstruirClienteCadastrarDto(
+            ClienteCadastroViewModel viewModel)
+        {
+            return new ClienteCadastrarDto
+            {
+                Nome = viewModel.Nome.Trim(),
+                Cpf = viewModel.Cpf.Trim(),
+                DataNascimento = viewModel.DataNascimento.GetValueOrDefault(),
+                Estado = viewModel.Estado,
+                Cidade = viewModel.Cidade,
+                Bairro = viewModel.Bairro,
+                Cep = viewModel.Cep,
+                Logradouro = viewModel.Logradouro,
+                Numero = viewModel.Numero,
+                Complemento = viewModel.Complemento
+            };
         }
     }
 }
