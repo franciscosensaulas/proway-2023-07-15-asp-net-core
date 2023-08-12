@@ -23,6 +23,16 @@ namespace LojaRepositorios.Repositorios
             _lojaContexto.SaveChanges();
         }
 
+        //public Cliente? ObterPorCpf(string cpf)
+        //{
+        //    return _dbSet.FirstOrDefault(x => x.Cpf == cpf);
+        //}
+        public Cliente? ObterPorCpf(string cpf) => 
+            _dbSet.FirstOrDefault(x => x.Cpf == cpf);
+
+        public bool ExisteComCpf(string cpf) => 
+            _dbSet.Any(x => x.Cpf == cpf);
+
         public List<Cliente> ObterTodos(string? pesquisa)
         {
             var query = _dbSet.AsQueryable();

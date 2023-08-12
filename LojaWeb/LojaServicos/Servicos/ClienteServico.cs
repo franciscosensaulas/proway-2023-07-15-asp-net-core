@@ -17,6 +17,11 @@ namespace LojaServicos.Servicos
         {
             var cliente = ConstruirCliente(dto);
 
+            var clienteExistenteComCpf = _repositorio.ObterPorCpf(dto.Cpf);
+
+            if (clienteExistenteComCpf != null)
+                throw new Exception($"Cliente já cadastrado com CPF: {dto.Cpf}");
+
             _repositorio.Cadastrar(cliente);
         }
 

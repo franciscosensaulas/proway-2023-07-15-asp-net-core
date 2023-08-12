@@ -6,5 +6,7 @@ namespace LojaRepositorios.Repositorios
     {
         void Cadastrar(Cliente cliente);
         List<Cliente> ObterTodos(string? pesquisa);
+        Cliente? ObterPorCpf(string cpf);
+        bool ExisteComCpf(string cpf);
     }
 }
