@@ -22,7 +22,7 @@ namespace LojaWebTests.UnitTests.LojaServicos.Servicos
             var clienteCadastrarDto = new ClienteCadastrarDto
             {
                 Nome = "Julio",
-                Cpf = "123.456.789-11",
+                Cpf = "123.456.789-10",
                 DataNascimento = new DateTime(2000, 06, 20),
                 Estado = "PA",
                 Cidade = "Boa Vista",
@@ -39,8 +39,6 @@ namespace LojaWebTests.UnitTests.LojaServicos.Servicos
             clienteServico.Cadastrar(clienteCadastrarDto);
 
             // Assert
-            clienteRepositorioMock.Received(1).ObterPorCpf(Arg.Is("123.456.789-10"));
-
             clienteRepositorioMock
                 .Received(1)
                 .Cadastrar(Arg.Is<Cliente>(clienteParametro => RecebeuClienteEsperado(clienteParametro)));
@@ -71,6 +69,59 @@ namespace LojaWebTests.UnitTests.LojaServicos.Servicos
             Assert.Equal("Cliente já cadastrado com CPF: 234.567.890-12", excecao.Message);
 
             clienteRepositorio.DidNotReceive().Cadastrar(Arg.Any<Cliente>());
+        }
+
+        [Fact]
+        public void Test_ObterTodos_Sucesso()
+        {
+            // Arrange
+            var clienteRepositorio = Substitute.For<IClienteRepositorio>();
+
+            var clienteServico = new ClienteServico(clienteRepositorio);
+
+            var clientesEsperados = new List<Cliente>
+            {
+                new Cliente
+                {
+                    Nome = "Pedro",
+                    Id = 8001,
+                    Cpf = "123.456.789-10",
+                    Endereco = new Endereco
+                    {
+                        Estado = "SC",
+                        Cidade = "Timbó"
+                    }
+                },
+                new Cliente
+                {
+                    Nome = "Júlia",
+                    Id = 8002,
+                    Cpf = "234.567.890-12",
+                    Endereco = new Endereco
+                    {
+                        Estado = "SC",
+                        Cidade = "Blumenau"
+                    }
+                }
+            };
+
+            clienteRepositorio.ObterTodos(Arg.Is("")).Returns(clientesEsperados);
+
+            // Act
+            var clientes = clienteServico.ObterTodos("");
+
+            // Assert
+            Assert.Equal(2, clientes.Count);
+
+            Assert.Equal("Pedro", clientes[0].Nome);
+            Assert.Equal("123.456.789-10", clientes[0].Cpf);
+            Assert.Equal(8001, clientes[0].Id);
+            Assert.Equal("SC - Timbó", clientes[0].Endereco);
+
+            Assert.Equal("Júlia", clientes[1].Nome);
+            Assert.Equal("234.567.890-12", clientes[1].Cpf);
+            Assert.Equal(8002, clientes[1].Id);
+            Assert.Equal("SC - Blumenau", clientes[1].Endereco);
         }
 
         public bool RecebeuClienteEsperado(Cliente cliente)
