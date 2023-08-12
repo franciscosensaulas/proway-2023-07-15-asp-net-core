@@ -1,4 +1,6 @@
-﻿namespace LojaServicos.Dtos.Clientes
+﻿using LojaRepositorios.Entidades;
+
+namespace LojaServicos.Dtos.Clientes
 {
     public class ClienteIndexDto
     {
@@ -6,5 +8,18 @@
         public string Nome { get; set; }
         public string Cpf { get; set; }
         public string Endereco { get; set; }
+
+        public static ClienteIndexDto ConstruirComEntidade(Cliente cliente)
+        {
+            return new ClienteIndexDto
+            {
+                Id = cliente.Id,
+                Nome = cliente.Nome,
+                Endereco = $"{cliente.Endereco.Estado} - {cliente.Endereco.Cidade}",
+                Cpf = cliente.Cpf
+            };
+        }
+
+        private ClienteIndexDto() { }
     }
 }

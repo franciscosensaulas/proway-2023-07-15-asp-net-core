@@ -34,24 +34,17 @@ namespace LojaServicos.Servicos
             return clientesDto;
         }
 
+        //private List<ClienteIndexDto> ConstruirClientesDto(List<Cliente> clientes) =>
+        //    clientes.Select(x => ClienteIndexDto.ConstruirComEntidade(x)).ToList();
+        
         private List<ClienteIndexDto> ConstruirClientesDto(List<Cliente> clientes)
         {
             var dtos = new List<ClienteIndexDto>();
 
             foreach (var cliente in clientes)
-            {
-                var dto = new ClienteIndexDto
-                {
-                    Id = cliente.Id,
-                    Nome = cliente.Nome,
-                    Endereco = $"{cliente.Endereco.Estado} - {cliente.Endereco.Cidade}",
-                    Cpf = cliente.Cpf
-                };
-                dtos.Add(dto);
-            }
+                dtos.Add(ClienteIndexDto.ConstruirComEntidade(cliente));
 
             return dtos;
-
         }
 
         private Cliente ConstruirCliente(ClienteCadastrarDto dto)
