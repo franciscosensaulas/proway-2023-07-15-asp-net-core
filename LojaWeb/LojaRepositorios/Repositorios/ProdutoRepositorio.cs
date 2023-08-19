@@ -18,10 +18,12 @@ namespace LojaRepositorios.Repositorios
             _dbSet = _lojaContexto.Set<Produto>();
         }
 
-        public void Cadastrar(Produto produto)
+        public int Cadastrar(Produto produto)
         {
             _dbSet.Add(produto);
             _lojaContexto.SaveChanges();
+
+            return produto.Id;
         }
 
         public void Editar(Produto produto)

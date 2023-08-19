@@ -1,5 +1,8 @@
 ﻿using LojaRepositorios.Entidades;
 using LojaRepositorios.Repositorios;
+using LojaServicos.Dtos.Produtos;
+using LojaServicos.Exceptions;
+using System.ComponentModel;
 
 namespace LojaServicos.Servicos
 {
@@ -13,17 +16,24 @@ namespace LojaServicos.Servicos
             _produtoRepositorio = produtoRepositorio;
         }
 
-        public void Cadastrar(Produto produto)
+        public int Cadastrar(ProdutoCadastrarDto dto)
         {
-            _produtoRepositorio.Cadastrar(produto);
+            var produto = ConstruirProduto(dto);
+
+            var id = _produtoRepositorio.Cadastrar(produto);
+
+            return id;
         }
 
-        public List<Produto> ObterTodos(string pesquisa)
+        public List<ProdutoIndexDto> ObterTodos(string pesquisa)
         {
             // Obter a lista de produtos da tabela de produtos
             var produtos = _produtoRepositorio.ObterTodos(pesquisa);
+
+            var produtoDtos = ConstruirProdutoIndexDtos(produtos);
+
             // Retornar a lista de produtos
-            return produtos;
+            return produtoDtos;
         }
 
         public void Apagar(int id)
@@ -32,15 +42,62 @@ namespace LojaServicos.Servicos
             _produtoRepositorio.Apagar(id);
         }
 
-        public Produto? ObterPorId(int id)
+        public ProdutoIndexDto? ObterPorId(int id)
         {
             var produto = _produtoRepositorio.ObterPorId(id);
+
+            if (produto == null)
+                return null;
+
+            return ConstruirProdutoIndexDto(produto);
+        }
+
+        public void Editar(ProdutoEditarDto dto)
+        {
+            var produto = _produtoRepositorio.ObterPorId(dto.Id);
+
+            if (produto == null)
+                throw new EntidadeNaoEncontrada();
+
+             produto = AtualizarProduto(dto, produto);
+
+            _produtoRepositorio.Editar(produto);
+        }
+
+        private Produto AtualizarProduto(ProdutoEditarDto dto, Produto produto)
+        {
+            produto.Nome = dto.Nome;
+            produto.PrecoUnitario = dto.PrecoUnitario;
+            produto.Quantidade = dto.Quantidade;
             return produto;
         }
 
-        public void Editar(Produto produto)
+        private static Produto ConstruirProduto(ProdutoCadastrarDto dto)
         {
-            _produtoRepositorio.Editar(produto);
+            return new Produto
+            {
+                Nome = dto.Nome,
+                PrecoUnitario = dto.PrecoUnitario,
+                Quantidade = dto.Quantidade
+            };
+        }
+
+        private List<ProdutoIndexDto> ConstruirProdutoIndexDtos(List<Produto> produtos)
+        {
+            return produtos
+                .Select(x => ConstruirProdutoIndexDto(x))
+                .ToList();
+        }
+
+        private ProdutoIndexDto ConstruirProdutoIndexDto(Produto produto)
+        {
+            return new ProdutoIndexDto
+            {
+                Id = produto.Id,
+                Nome = produto.Nome,
+                PrecoUnitario = produto.PrecoUnitario,
+                Quantidade = produto.Quantidade,
+            };
         }
     }
 }

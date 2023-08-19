@@ -27,7 +27,7 @@ namespace LojaRepositorios.DependecyInjections
 
         private static IServiceCollection AddDatabaseSqlServer(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString("SqlServerArquivo");
+            var connectionString = configuration.GetConnectionString("SqlServer");
 
             services.AddDbContext<LojaContexto>(options => options.UseSqlServer(connectionString));
 

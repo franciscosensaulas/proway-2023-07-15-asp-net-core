@@ -1,3 +1,6 @@
+using FluentValidation;
+using LojaAPI.Controllers;
+using LojaAPI.Validators;
 using LojaRepositorios.Database;
 using LojaRepositorios.DependecyInjections;
 using LojaRepositorios.Repositorios;
@@ -16,6 +19,8 @@ builder.Services
     .AddSwaggerGen()
     .AddServiceDependencyInjection()
     .AddRepositoryDependecyInjection(builder.Configuration);
+
+builder.Services.AddScoped<IValidator<ProdutoCreateModel>, ProdutoValidator>();
     
 
 var app = builder.Build();
