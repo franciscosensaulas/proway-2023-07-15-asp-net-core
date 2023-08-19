@@ -1,24 +1,14 @@
-using LojaRepositorios.Database;
-using LojaRepositorios.Repositorios;
-using LojaServicos.Servicos;
-using Microsoft.EntityFrameworkCore;
+using LojaRepositorios.DependecyInjections;
+using LojaServicos.DependencyInjections;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-var connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\moc\proway-2023-07-15-asp-net-core\LojaWeb\LojaRepositorios\Database\WindowsFormsBancoDados.mdf;Integrated Security=True";
-
-builder.Services.AddDbContext<LojaContexto>(
-    options => options.UseSqlServer(connectionString));
-
-// Adicionar as classes concretas com suas interfaces na injeção de dependencia
-builder.Services.AddScoped<IProdutoServico, ProdutoServico>();
-builder.Services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
-
-builder.Services.AddScoped<IClienteServico, ClienteServico>();
-builder.Services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
+builder.Services
+    .AddServiceDependencyInjection()
+    .AddRepositoryDependecyInjection(builder.Configuration);
 
 var app = builder.Build();
 
@@ -30,12 +20,10 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseAuthorization();
+app.UseHttpsRedirection()
+    .UseStaticFiles()
+    .UseRouting()
+    .UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
