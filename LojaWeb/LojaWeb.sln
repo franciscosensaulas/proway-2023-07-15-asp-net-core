@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03 - Tests", "03 - Tests", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LojaWebTests", "LojaWebTests\LojaWebTests.csproj", "{384A9152-4A98-4994-BDE2-F7668D3E7F2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LojaAPI", "LojaAPI\LojaAPI.csproj", "{AD8419E5-32B3-414B-99D9-0B437F1A2973}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LojaAPI", "LojaAPI\LojaAPI.csproj", "{AD8419E5-32B3-414B-99D9-0B437F1A2973}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

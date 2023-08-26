@@ -1,17 +1,18 @@
-﻿<form action="/produto/editar?id=@ViewBag.Produto.Id" method="post">
+﻿@using LojaMvc.Models.Produto;
+@model ProdutoEditarViewModel
+
+<form asp-action="editar" method="post">
+    <input asp-for="Id" />
     <div class="row">
         <div class="col-12">
-            <label class="form-label" for="campo-nome">Nome</label>
-            <input class="form-control" type="text" id="campo-nome" name="nome"
-                   value="@ViewBag.Produto.Nome" />
+            <label class="form-label" asp-for="Nome"></label>
+            <input class="form-control" asp-for="Nome" />
         </div>
     </div>
     <div class="row mb-2">
         <div class="col-12">
-            <label class="form-label" for="campo-preco-unitario">Preço unitário</label>
-            <input class="form-control" type="text" id="campo-preco-unitario"
-                   name="precoUnitario" 
-                   value="@ViewBag.Produto.PrecoUnitario" />
+            <label class="form-label" asp-for="PrecoUnitario"></label>
+            <input class="form-control" asp-for="PrecoUnitario" />
         </div>
     </div>
 

@@ -1,3 +1,4 @@
+using LojaMvc.DependecyInjections;
 using LojaRepositorios.DependecyInjections;
 using LojaServicos.DependencyInjections;
 
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services
+    .AddMvcAutoMapper()
     .AddServiceDependencyInjection()
     .AddRepositoryDependecyInjection(builder.Configuration);
 

@@ -1,5 +1,7 @@
-﻿using FluentValidation;
+﻿using AutoMapper;
+using FluentValidation;
 using FluentValidation.Results;
+using LojaAPI.Models.Produto;
 using LojaAPI.Validators;
 using LojaRepositorios.Entidades;
 using LojaServicos.Dtos.Produtos;
@@ -14,13 +16,16 @@ namespace LojaAPI.Controllers
     {
         private readonly IValidator<ProdutoCreateModel> _produtoValidator;
         private readonly IProdutoServico _produtoServico;
+        private readonly IMapper _mapper;
 
         public ProdutoController(
             IValidator<ProdutoCreateModel> produtoValidator,
-            IProdutoServico produtoServico)
+            IProdutoServico produtoServico,
+            IMapper mapper)
         {
             _produtoValidator = produtoValidator;
             _produtoServico = produtoServico;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -62,12 +67,8 @@ namespace LojaAPI.Controllers
                 return UnprocessableEntity(erroDetalhes);
             }
 
-            var dto = new ProdutoCadastrarDto
-            {
-                Nome = produtoCreateModel.Nome.Trim(),
-                PrecoUnitario = produtoCreateModel.PrecoUnitario,
-                Quantidade = produtoCreateModel.Quantidade
-            };
+            var dto = _mapper.Map<ProdutoCadastrarDto>(produtoCreateModel);
+
             _produtoServico.Cadastrar(dto);
 
             return Ok();
@@ -87,13 +88,8 @@ namespace LojaAPI.Controllers
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody] ProdutoUpdateModel produtoUpdateModel)
         {
-            var dto = new ProdutoEditarDto
-            {
-                Id = id,
-                Nome = produtoUpdateModel.Nome.Trim(),
-                PrecoUnitario = produtoUpdateModel.PrecoUnitario,
-                Quantidade = produtoUpdateModel.Quantidade
-            };
+            var dto = _mapper.Map<ProdutoEditarDto>(produtoUpdateModel);
+            dto.Id = id;
 
             try
             {
@@ -124,19 +120,5 @@ namespace LojaAPI.Controllers
 
             return dados;
         }
-    }
-
-    public class ProdutoUpdateModel
-    {
-        public string Nome { get; set; }
-        public decimal PrecoUnitario { get; set; }
-        public int Quantidade { get; set; }
-    }
-
-    public class ProdutoCreateModel
-    {
-        public string Nome { get; set; }
-        public decimal PrecoUnitario { get; set; }
-        public int Quantidade { get; set; }
     }
 }

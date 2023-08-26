@@ -15,9 +15,6 @@ namespace LojaRepositorios.Mapeamentos
             builder.Property(x => x.Nome)
                 .HasColumnName("nome");
 
-            builder.Property(x => x.Quantidade)
-                .HasColumnName("quantidade");
-
             builder.Property(x => x.PrecoUnitario)
                 .HasColumnName("preco_unitario");
         }

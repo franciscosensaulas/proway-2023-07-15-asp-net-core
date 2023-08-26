@@ -1,5 +1,7 @@
 using FluentValidation;
 using LojaAPI.Controllers;
+using LojaAPI.DependencyInjections;
+using LojaAPI.Models.Produto;
 using LojaAPI.Validators;
 using LojaRepositorios.Database;
 using LojaRepositorios.DependecyInjections;
@@ -18,10 +20,10 @@ builder.Services
     .AddEndpointsApiExplorer()
     .AddSwaggerGen()
     .AddServiceDependencyInjection()
-    .AddRepositoryDependecyInjection(builder.Configuration);
+    .AddRepositoryDependecyInjection(builder.Configuration)
+    .AddApiAutoMapper();
 
-builder.Services.AddScoped<IValidator<ProdutoCreateModel>, ProdutoValidator>();
-    
+builder.Services.AddScoped<IValidator<ProdutoCreateModel>, ProdutoValidator>();    
 
 var app = builder.Build();
 

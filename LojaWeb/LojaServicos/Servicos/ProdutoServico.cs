@@ -68,7 +68,6 @@ namespace LojaServicos.Servicos
         {
             produto.Nome = dto.Nome;
             produto.PrecoUnitario = dto.PrecoUnitario;
-            produto.Quantidade = dto.Quantidade;
             return produto;
         }
 
@@ -77,8 +76,7 @@ namespace LojaServicos.Servicos
             return new Produto
             {
                 Nome = dto.Nome,
-                PrecoUnitario = dto.PrecoUnitario,
-                Quantidade = dto.Quantidade
+                PrecoUnitario = dto.PrecoUnitario
             };
         }
 
@@ -95,8 +93,7 @@ namespace LojaServicos.Servicos
             {
                 Id = produto.Id,
                 Nome = produto.Nome,
-                PrecoUnitario = produto.PrecoUnitario,
-                Quantidade = produto.Quantidade,
+                PrecoUnitario = produto.PrecoUnitario
             };
         }
     }
