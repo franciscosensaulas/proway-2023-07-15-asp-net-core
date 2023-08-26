@@ -1,6 +1,8 @@
 using LojaMvc.DependecyInjections;
+using LojaRepositorios.Database;
 using LojaRepositorios.DependecyInjections;
 using LojaServicos.DependencyInjections;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,5 +32,11 @@ app.UseHttpsRedirection()
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+using (var scopo = app.Services.CreateScope())
+{
+    var contexto = scopo.ServiceProvider.GetService<LojaContexto>();
+    contexto?.Database.Migrate();
+}
 
 app.Run();

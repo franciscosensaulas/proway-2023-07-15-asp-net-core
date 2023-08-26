@@ -1,13 +1,10 @@
 using FluentValidation;
-using LojaAPI.Controllers;
 using LojaAPI.DependencyInjections;
 using LojaAPI.Models.Produto;
 using LojaAPI.Validators;
 using LojaRepositorios.Database;
 using LojaRepositorios.DependecyInjections;
-using LojaRepositorios.Repositorios;
 using LojaServicos.DependencyInjections;
-using LojaServicos.Servicos;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,7 +20,9 @@ builder.Services
     .AddRepositoryDependecyInjection(builder.Configuration)
     .AddApiAutoMapper();
 
-builder.Services.AddScoped<IValidator<ProdutoCreateModel>, ProdutoValidator>();    
+builder.Services.AddScoped<IValidator<ProdutoCreateModel>, ProdutoValidator>();
+
+builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
@@ -34,10 +33,18 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.MapHealthChecks("healthz");
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
+
+using(var scopo = app.Services.CreateScope())
+{
+    var contexto = scopo.ServiceProvider.GetService<LojaContexto>();
+    contexto?.Database.Migrate();
+}
 
 app.Run();
