@@ -25,4 +25,7 @@
 		<ProjectReference Include="..\LojaServicos\LojaServicos.csproj" />
 	</ItemGroup>
 
+
+
+
 </Project>

@@ -2,7 +2,6 @@
 using LojaRepositorios.Repositorios;
 using LojaServicos.Dtos.Produtos;
 using LojaServicos.Exceptions;
-using System.ComponentModel;
 
 namespace LojaServicos.Servicos
 {

@@ -1,5 +1,4 @@
-﻿using LojaRepositorios.Entidades;
-using LojaServicos.Dtos.Produtos;
+﻿using LojaServicos.Dtos.Produtos;
 
 namespace LojaServicos.Servicos
 {

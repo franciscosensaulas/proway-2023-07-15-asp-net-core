@@ -18,7 +18,8 @@ builder.Services
     .AddSwaggerGen()
     .AddServiceDependencyInjection()
     .AddRepositoryDependecyInjection(builder.Configuration)
-    .AddApiAutoMapper();
+    .AddApiAutoMapper()
+    .AddLojaAutentication();
 
 builder.Services.AddScoped<IValidator<ProdutoCreateModel>, ProdutoValidator>();
 
@@ -38,6 +39,8 @@ app.MapHealthChecks("healthz");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapControllers();
 

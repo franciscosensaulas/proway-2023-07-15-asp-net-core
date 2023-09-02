@@ -1,5 +1,4 @@
 ﻿using LojaMvc.Models.Cliente;
-using LojaRepositorios.Entidades;
 using LojaServicos.Dtos.Clientes;
 using LojaServicos.Servicos;
 using Microsoft.AspNetCore.Mvc;

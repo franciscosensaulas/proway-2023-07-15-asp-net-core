@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using LojaMvc.Models.Produto;
-using LojaRepositorios.Entidades;
 using LojaServicos.Dtos.Produtos;
 using LojaServicos.Servicos;
 using Microsoft.AspNetCore.Mvc;

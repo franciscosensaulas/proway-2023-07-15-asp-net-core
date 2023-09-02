@@ -2,8 +2,6 @@
 using FluentValidation;
 using FluentValidation.Results;
 using LojaAPI.Models.Produto;
-using LojaAPI.Validators;
-using LojaRepositorios.Entidades;
 using LojaServicos.Dtos.Produtos;
 using LojaServicos.Exceptions;
 using LojaServicos.Servicos;
@@ -11,21 +9,20 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LojaAPI.Controllers
 {
-    [Route("produtos")]
-    public class ProdutoController : Controller
+    
+    [Route("/api/produtos")]
+    public class ProdutoController : ControllerAuthenticatedBase
     {
         private readonly IValidator<ProdutoCreateModel> _produtoValidator;
         private readonly IProdutoServico _produtoServico;
-        private readonly IMapper _mapper;
 
         public ProdutoController(
             IValidator<ProdutoCreateModel> produtoValidator,
             IProdutoServico produtoServico,
-            IMapper mapper)
+            IMapper mapper) : base(mapper)
         {
             _produtoValidator = produtoValidator;
             _produtoServico = produtoServico;
-            _mapper = mapper;
         }
 
         [HttpGet]

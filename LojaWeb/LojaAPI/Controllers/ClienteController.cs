@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LojaAPI.Filters;
 using LojaAPI.Models.Cliente;
 using LojaServicos.Dtos.Clientes;
 using LojaServicos.Servicos;
@@ -6,16 +7,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LojaAPI.Controllers
 {
-    [Route("/clientes")]
-    public class ClienteController : Controller
+    [ServiceFilter(typeof(UsuarioAutenticadoFilter))]
+    [Route("/api/clientes")]
+    public class ClienteController : ControllerAuthenticatedBase
     {
         private readonly IClienteServico _clienteServico;
-        private readonly IMapper _mapper;
 
-        public ClienteController(IClienteServico clienteServico, IMapper mapper)
+        public ClienteController(IClienteServico clienteServico, IMapper mapper) : base(mapper)
         {
             _clienteServico = clienteServico;
-            _mapper = mapper;
         }
 
         // Obter todos

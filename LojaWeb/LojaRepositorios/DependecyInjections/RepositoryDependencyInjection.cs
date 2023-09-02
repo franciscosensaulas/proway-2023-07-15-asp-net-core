@@ -21,6 +21,7 @@ namespace LojaRepositorios.DependecyInjections
         {
             services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
             services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
+            services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 
             return services;
         }
