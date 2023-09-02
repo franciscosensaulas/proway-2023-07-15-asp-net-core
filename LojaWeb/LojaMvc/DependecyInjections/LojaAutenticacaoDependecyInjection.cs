@@ -1,6 +1,4 @@
-﻿using LojaAPI.Filters;
-
-namespace LojaAPI.DependencyInjections;
+﻿namespace LojaMvc.DependecyInjections;
 
 public static class LojaAutenticacaoDependecyInjection
 {
@@ -14,8 +12,6 @@ public static class LojaAutenticacaoDependecyInjection
             options.Cookie.HttpOnly = true;
             options.Cookie.IsEssential = true;
         });
-        
-        services.AddScoped<UsuarioAutenticadoFilter>();
         
         return services;
     }

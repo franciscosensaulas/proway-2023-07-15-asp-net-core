@@ -1,8 +1,10 @@
 using LojaMvc.DependecyInjections;
+using LojaMvc.Middlewares;
 using LojaRepositorios.Database;
 using LojaRepositorios.DependecyInjections;
 using LojaServicos.DependencyInjections;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services
+    .AddLojaAutentication()
+    .AddHttpContextAccessor()
     .AddMvcAutoMapper()
     .AddServiceDependencyInjection()
     .AddRepositoryDependecyInjection(builder.Configuration);
@@ -27,11 +31,14 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection()
     .UseStaticFiles()
     .UseRouting()
-    .UseAuthorization();
+    .UseAuthorization()
+    .UseSession()
+    .UseMiddleware<AutenticacaoMiddleware>();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 
 using (var scopo = app.Services.CreateScope())
 {
