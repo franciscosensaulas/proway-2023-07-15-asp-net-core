@@ -1,6 +1,6 @@
 ﻿namespace LojaRepositorios.Entidades
 {
-    public class Cliente : ModeloBase
+    public class Cliente : EntidadeBase
     {
         public string Nome { get; set; }
         public string Cpf { get; set; }

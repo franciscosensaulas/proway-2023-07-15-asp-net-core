@@ -25,7 +25,7 @@ namespace LojaServicos.Servicos
             if (clienteExistenteComCpf != null)
                 throw new Exception($"Cliente já cadastrado com CPF: {dto.Cpf}");
 
-            _repositorio.Cadastrar(cliente);
+            _repositorio.Add(cliente);
         }
 
         public List<ClienteIndexDto> ObterTodos(string? pesquisa)

@@ -22,7 +22,8 @@ namespace LojaRepositorios.Database
              * 
              * -- Criar migration
              * dotnet ef migrations add <NomeMigration> --project LojaRepositorios --startup-project LojaAPI
-             * 
+             *
+             * dotnet ef migrations add AddColumnActiveToAllTables --project LojaRepositorios --startup-project LojaAPI
              * -- Remover última migration
              * dotnet ef migrations remove --project LojaRepositorios --startup-project LojaAPI
              */

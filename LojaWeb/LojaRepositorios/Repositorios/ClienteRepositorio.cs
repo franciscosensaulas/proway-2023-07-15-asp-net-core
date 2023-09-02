@@ -1,37 +1,17 @@
 ﻿using LojaRepositorios.Database;
 using LojaRepositorios.Entidades;
 using LojaRepositorios.ExtensionMethods;
-using Microsoft.EntityFrameworkCore;
-using System.Data;
 
 namespace LojaRepositorios.Repositorios
 {
-    public class ClienteRepositorio : IClienteRepositorio
+    public class ClienteRepositorio : RepositorioBase<Cliente>, IClienteRepositorio
     {
-        private readonly LojaContexto _lojaContexto;
-        private readonly DbSet<Cliente> _dbSet;
-
-        public ClienteRepositorio(LojaContexto lojaContexto)
+        public ClienteRepositorio(LojaContexto lojaContexto) : base(lojaContexto)
         {
-            _lojaContexto = lojaContexto;
-            _dbSet = _lojaContexto.Set<Cliente>();
         }
 
-        public void Cadastrar(Cliente cliente)
-        {
-            _dbSet.Add(cliente);
-            _lojaContexto.SaveChanges();
-        }
-
-        //public Cliente? ObterPorCpf(string cpf)
-        //{
-        //    return _dbSet.FirstOrDefault(x => x.Cpf == cpf);
-        //}
         public Cliente? ObterPorCpf(string cpf) => 
             _dbSet.FirstOrDefault(x => x.Cpf == cpf);
-
-        public bool ExisteComCpf(string cpf) => 
-            _dbSet.Any(x => x.Cpf == cpf);
 
         public List<Cliente> ObterTodos(string? pesquisa)
         {

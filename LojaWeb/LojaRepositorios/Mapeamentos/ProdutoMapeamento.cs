@@ -11,8 +11,13 @@ namespace LojaRepositorios.Mapeamentos
         public void Configure(EntityTypeBuilder<Produto> builder)
         {
             builder.ToTable("Produtos");
-
             builder.HasKey(x => x.Id);
+
+            builder.Property(x => x.Ativo)
+                .HasColumnType("BIT")
+                .HasDefaultValue(true)
+                .IsRequired()
+                .HasColumnName("Ativo");
 
             builder.Property(x => x.Nome)
                 .HasColumnType("VARCHAR")
